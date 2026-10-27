@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Highway Driving Simulator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <aside id="panel">
+    <h1>Highway Driving Sim</h1>
+
+    <section>
+      <h2>Scenario</h2>
+      <label>Scenario <select id="scenario"></select></label>
+      <p id="scenario-desc" class="muted"></p>
+      <div id="params"></div>
+      <label>Seed
+        <span class="row">
+          <input id="seed" type="number" min="0" max="4294967295" step="1" value="1">
+          <button id="seed-random" title="Random seed" type="button">🎲</button>
+        </span>
+      </label>
+      <label>Controller
+        <select id="controller">
+          <option value="native">Native C controller</option>
+          <option value="manual">Manual (keyboard)</option>
+        </select>
+      </label>
+      <p id="native-status" class="muted small"></p>
+      <button id="load" class="primary" type="button">Load scenario</button>
+      <div id="load-errors" class="errors" hidden></div>
+    </section>
+
+    <section>
+      <h2>Playback</h2>
+      <div class="row buttons">
+        <button id="start" type="button">▶ Start</button>
+        <button id="pause" type="button">⏸ Pause</button>
+        <button id="step" type="button" title="Advance one control step">⏭ Step</button>
+        <button id="reset" type="button">⟲ Reset</button>
+      </div>
+      <label>Playback speed <select id="speed"></select></label>
+      <div id="manual-help" class="muted small" hidden>
+        Manual: <kbd>↑</kbd> accelerate, <kbd>↓</kbd> brake, <kbd>Space</kbd> full brake, <kbd>←</kbd>/<kbd>→</kbd> steer.
+        Click the road view first so it has keyboard focus.
+      </div>
+    </section>
+
+    <section>
+      <h2>Vehicle &amp; commands</h2>
+      <div id="telemetry" class="grid"></div>
+      <div class="bar-row"><span>Accel cmd</span><div class="bar" id="bar-accel"><i></i></div><b id="val-accel">–</b></div>
+      <div class="bar-row"><span>Steer cmd</span><div class="bar" id="bar-steer"><i></i></div><b id="val-steer">–</b></div>
+    </section>
+
+    <section>
+      <h2>Outcome</h2>
+      <div id="outcome" class="outcome pending">Not started</div>
+    </section>
+
+    <section class="grow">
+      <h2>Safety &amp; scenario events <span id="event-count" class="muted"></span></h2>
+      <ol id="events"></ol>
+    </section>
+  </aside>
+
+  <main>
+    <div id="status-bar"><span id="status">Connecting…</span><span class="muted small">Scroll to zoom · Trajectory in cyan · Destination in green</span></div>
+    <canvas id="view" tabindex="0"></canvas>
+    <canvas id="overview"></canvas>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

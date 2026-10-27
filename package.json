@@ -1,0 +1,14 @@
+{
+  "name": "intent-check-driving-demo",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Build a highway driving controller with Intent Check Live and inspect its behavior in a local simulator.",
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "build:controller": "node scripts/build-controller.mjs",
+    "build:fixtures": "node scripts/build-controller.mjs controller/placeholder_controller.c build/placeholder_controller && node scripts/build-controller.mjs controller/examples/invalid_output_controller.c build/invalid_controller",
+    "start": "node server/server.js",
+    "test": "npm run build:fixtures && node --test"
+  }
+}
